@@ -1,0 +1,8 @@
+$baseValue: 16;
+
+@use "sass:math";
+
+@function rem($pxValue) {
+  $remValue: math.div($pxValue, $baseValue) + rem; 
+  @return $remValue;
+}
