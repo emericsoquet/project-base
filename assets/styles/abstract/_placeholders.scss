@@ -1,0 +1,26 @@
+%appearance-none {
+    @include vendor-prefixes(appearance, none, moz webkit);
+}
+
+%pseudo-block {
+    content: '';
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+%full-part {
+    @extend %pseudo-block;
+    z-index: -2;
+}
+%full-left {
+    @extend %full-part;
+    left: -100vw;
+}
+%full-right {
+    @extend %full-part;
+    right: -100vw;
+}
