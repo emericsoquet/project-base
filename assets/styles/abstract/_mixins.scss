@@ -1,0 +1,49 @@
+$breakpoints: ('mobile': 360px, 'xs': 420px, 'sm': 576px, 'md': 768px, 'lg': 992px, 'xl': 1200px, 'xxl': 1400px);
+
+@mixin min-width($breakpoint) {
+    @each $format, $pixel in $breakpoints {
+        @if($breakpoint == $format) {
+            @media screen and (min-width: $pixel) { @content; }
+        }
+        @else {
+            @media screen and (min-width: $breakpoint) { @content; }
+        }
+    }
+}
+@mixin max-width($breakpoint) {
+    @each $format, $pixel in $breakpoints {
+        @if($breakpoint == $format) {
+            @media screen and (max-width: $pixel) { @content; }
+        }
+        @else {
+            @media screen and (max-width: $breakpoint) { @content; }
+        }
+    }
+}
+
+@mixin vendor-prefixes($property, $value, $prefixes: ()) {
+    @each $prefix in $prefixes {
+        #{'-' + $prefix + '-' + $property}: $value;
+    }
+    #{$property}: $value;
+}
+@mixin transition($value) {
+    @include vendor-prefixes(transition, $value, moz o webkit);
+}
+
+@mixin full-sides($color) {
+    &::before, &::after {
+        background: $color;
+    }
+    &::before {
+        @extend %full-left;
+    }
+    &::after {
+        @extend %full-right;
+    }
+}
+
+@mixin square-container($dim) {
+    max-height: $dim;
+    max-width: $dim;
+}
