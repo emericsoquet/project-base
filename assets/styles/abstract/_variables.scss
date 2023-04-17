@@ -8,6 +8,10 @@ $gutterMid: math.div($gutterWidth, 2);
 // configuration des points d'arrêts
 $breakpoints: ('mb': 360px, 'xs': 420px, 'sm': 576px, 'md': 768px, 'lg': 992px, 'xl': 1086px, '2xl': 1296px, '3xl': 1560px);
 
+// paramétrage des polices
+$baseValue: 16px;
+$baseFont: 'Tahoma';
+
 // réglage des marges entre sections
 $marginSmall: 3rem;
 $marginLarge: 5rem;

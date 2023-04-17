@@ -54,6 +54,10 @@ input {
   outline: none;
 }
 
+body {
+  font-family: "Tahoma", "Helvetica", "Arial", sans-serif;
+}
+
 .container {
   margin: 0 auto;
   height: 100px;
