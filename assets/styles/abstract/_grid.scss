@@ -1,0 +1,46 @@
+@mixin container($gutters: true, $nested: true, $class: 'row') {
+
+    @if $nested {
+        margin: 0 auto;
+        @each $format, $pixel in $breakpoints {
+            @include min-width($format) {
+                max-width: $pixel;
+            }
+        }
+    } @else {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .#{$class} {
+        display: flex;
+        flex-wrap: wrap;
+        /* width: 100%; */
+        & > * {
+            @include grid-col(12);
+        }
+    }
+
+    @if $gutters {
+
+        .#{$class} {
+            margin: 0 ($gutterMid * -1);
+            & > * {
+                padding-left: $gutterMid;
+                padding-right: $gutterMid;
+            }
+        }
+
+    }
+
+
+}
+
+@mixin grid-col($i) {
+    flex-basis: (math.div(100, math.div($gridCols, $i)) * 1%);
+}
+
+@mixin offset-col($i, $orientation: 'left') {
+    margin-#{$orientation} : (math.div(100, math.div($gridCols, $i)) * 1%);
+}
+

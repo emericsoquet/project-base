@@ -1,8 +1,12 @@
+@use 'sass:math';
+
 // abstract : variables, mixins & placeholders
-@import 'abstract/mixins';
 @import 'abstract/variables';
-@import 'abstract/placeholders';
+@import 'abstract/breakpoints';
+@import 'abstract/mixins';
+@import 'abstract/extends';
 @import 'abstract/functions';
+@import 'abstract/grid';
 
 // core : base css du projet
 @import 'core/reset';
@@ -12,6 +16,7 @@
 @import 'components/buttons';
 
 // layout : parties communes à toutes les pages
+@import 'layout/container';
 @import 'layout/header';
 @import 'layout/footer';
 

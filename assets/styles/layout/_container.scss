@@ -1,0 +1,25 @@
+.container {
+    @include container;
+    height: 100px;
+
+    .element {
+        height: 100px;
+
+        @include min-width(md) {
+            @include grid-col(6);
+        }
+        @include min-width(xl) {
+            @include grid-col(4);
+        }
+    }
+
+    .offset {
+        @include offset-col(4);
+        @include alignment;
+        @include transition(background .4s ease-in-out);
+        background: yellowgreen;
+        &:hover {
+            background: turquoise;
+        }
+    }
+}

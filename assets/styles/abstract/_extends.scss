@@ -24,3 +24,21 @@
     @extend %full-part;
     right: -100vw;
 }
+
+%section-margin {
+    margin-top: $marginSmall;
+    margin-bottom: $marginSmall;
+    @include min-width(md) {
+        margin-top: $marginLarge;
+        margin-bottom: $marginLarge;
+    }
+}
+%section-padding {
+    padding-top: $marginSmall;
+    padding-bottom: $marginSmall;
+    @include min-width(md) {
+        padding-top: $marginLarge;
+        padding-bottom: $marginLarge;
+    }
+}
+

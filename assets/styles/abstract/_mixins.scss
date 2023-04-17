@@ -1,34 +1,37 @@
-$breakpoints: ('mobile': 360px, 'xs': 420px, 'sm': 576px, 'md': 768px, 'lg': 992px, 'xl': 1200px, 'xxl': 1400px);
+@mixin alignment($x: center, $y: center, $direction: row) {
 
-@mixin min-width($breakpoint) {
-    @each $format, $pixel in $breakpoints {
-        @if($breakpoint == $format) {
-            @media screen and (min-width: $pixel) { @content; }
-        }
-        @else {
-            @media screen and (min-width: $breakpoint) { @content; }
-        }
+    display: flex;
+    flex-direction: $direction;
+
+    @if ($direction == column or $direction == column-reverse) {
+        justify-content: $y;
+        align-items: $x;
+    } @else {
+        justify-content: $x;
+        align-items: $y;
     }
-}
-@mixin max-width($breakpoint) {
-    @each $format, $pixel in $breakpoints {
-        @if($breakpoint == $format) {
-            @media screen and (max-width: $pixel) { @content; }
-        }
-        @else {
-            @media screen and (max-width: $breakpoint) { @content; }
-        }
-    }
+
 }
 
-@mixin vendor-prefixes($property, $value, $prefixes: ()) {
+@mixin vendor-prefixes($property, $value, $prefixes: (moz, o, webkit, ms), $onProperty: true) {
     @each $prefix in $prefixes {
-        #{'-' + $prefix + '-' + $property}: $value;
+        @if $onProperty {
+            #{'-' + $prefix + '-' + $property}: $value;
+        } @else {
+            $property: #{'-' + $prefix + '-' + $value};
+        }
     }
     #{$property}: $value;
 }
+
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
 @mixin transition($value) {
-    @include vendor-prefixes(transition, $value, moz o webkit);
+    @include vendor-prefixes(transition, $value, (moz, o, webkit));
 }
 
 @mixin full-sides($color) {
@@ -46,4 +49,17 @@ $breakpoints: ('mobile': 360px, 'xs': 420px, 'sm': 576px, 'md': 768px, 'lg': 992
 @mixin square-container($dim) {
     max-height: $dim;
     max-width: $dim;
+}
+
+@mixin ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
 }

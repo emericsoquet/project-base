@@ -41,6 +41,10 @@ table{
 }
 
 input{
-    -webkit-appearance: none;
     border-radius: 0;
+}
+
+*:focus, *:focus-within, *:focus-visible {
+    @extend %appearance-none;
+    outline: none;
 }
