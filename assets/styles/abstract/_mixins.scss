@@ -33,6 +33,23 @@
 @mixin transition($value) {
     @include vendor-prefixes(transition, $value, (moz, o, webkit));
 }
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+@mixin animation($value) {
+    @include vendor-prefixes(animation, $value, (moz, o, webkit)); 
+}
 
 @mixin full-sides($color) {
     &::before, &::after {
