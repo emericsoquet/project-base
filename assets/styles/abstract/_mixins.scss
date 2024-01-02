@@ -51,16 +51,10 @@
     @include vendor-prefixes(animation, $value, (moz, o, webkit)); 
 }
 
-@mixin full-sides($color) {
-    &::before, &::after {
-        background: $color;
-    }
-    &::before {
-        @extend %full-left;
-    }
-    &::after {
-        @extend %full-right;
-    }
+@mixin bg-sides($color) {
+    background-color: $color;
+    box-shadow: 0 0 0 100vmax $color;
+    clip-path: inset(0 -100vmax);
 }
 
 @mixin square-container($dim) {
