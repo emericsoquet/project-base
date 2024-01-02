@@ -70,6 +70,15 @@
     height: $dim;
     width: $dim;
 }
+@mixin radius($direction, $value) {
+    border-#{$direction}-radius: $value;
+}
+@mixin all-radius($value) {
+    border-top-left-radius: $value;
+    border-top-bottom-radius: $value;
+    border-bottom-left-radius: $value;
+    border-bottom-right-radius: $value;
+}
 
 /* VENDOR PREFIXES */
 @mixin vendor-prefixes($property, $value, $prefixes: (moz, o, webkit, ms), $onProperty: true) {
