@@ -57,9 +57,17 @@
     clip-path: inset(0 -100vmax);
 }
 
-@mixin square-container($dim) {
+@mixin square-max($dim) {
     max-height: $dim;
     max-width: $dim;
+}
+@mixin square-min($dim) {
+    min-height: $dim;
+    min-width: $dim;
+}
+@mixin square($dim) {
+    height: $dim;
+    width: $dim;
 }
 
 @mixin ratio($x,$y, $pseudo: false) {
