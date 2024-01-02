@@ -1,3 +1,5 @@
+$baseValue: 16;
+
 @function rem($pxValue) {
   $remValue: math.div($pxValue, $baseValue) + rem; 
   @return $remValue;
