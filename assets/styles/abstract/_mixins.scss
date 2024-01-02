@@ -70,6 +70,23 @@
     width: $dim;
 }
 
+@mixin margin-w($value) {
+    margin-right: $value;
+    margin-left: $value;
+}
+@mixin margin-h($value) {
+    margin-top: $value;
+    margin-bottom: $value;
+}
+@mixin padding-w($value) {
+    padding-right: $value;
+    padding-left: $value;
+}
+@mixin padding-h($value) {
+    padding-top: $value;
+    padding-bottom: $value;
+}
+
 @mixin ratio($x,$y, $pseudo: false) {
     $padding: unquote( ( $y / $x ) * 100 + '%' );
     @if $pseudo {
