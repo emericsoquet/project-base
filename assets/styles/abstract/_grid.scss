@@ -1,7 +1,10 @@
 @mixin container($gutters: true, $nested: true, $class: 'row') {
 
     @if $nested {
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: $gutterMid;
+        padding-right: $gutterMid;
         @each $format, $pixel in $breakpoints {
             @include min-width($format) {
                 max-width: $pixel;
@@ -15,7 +18,11 @@
     .#{$class} {
         display: flex;
         flex-wrap: wrap;
-        /* width: 100%; */
+
+        & .#{$class} {
+            @include padding-w(0);
+            margin: 0 auto;
+        }
         & > * {
             @include grid-col(12);
         }
