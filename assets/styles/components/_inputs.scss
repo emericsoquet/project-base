@@ -1,0 +1,16 @@
+input[type="text"], input[type=email], input[type=tel], textarea {
+    @extend %appearance-none;
+    display: block;
+    width: 100%;
+    font-family: $baseFont, 'Helvetica', 'Arial', sans-serif;
+    color: $fontColor;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.input-group {
+
+}
+
