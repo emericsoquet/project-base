@@ -1,8 +1,32 @@
-@mixin alignment($x: center, $y: center, $direction: row) {
+/* PSEUDO ELEMENTS */
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
 
+/* SPACING */
+@mixin margin-w($value) {
+    margin-right: $value;
+    margin-left: $value;
+}
+@mixin margin-h($value) {
+    margin-top: $value;
+    margin-bottom: $value;
+}
+@mixin padding-w($value) {
+    padding-right: $value;
+    padding-left: $value;
+}
+@mixin padding-h($value) {
+    padding-top: $value;
+    padding-bottom: $value;
+}
+
+/* ALIGNMENT */
+@mixin alignment($x: center, $y: center, $direction: row) {
     display: flex;
     flex-direction: $direction;
-
     @if ($direction == column or $direction == column-reverse) {
         justify-content: $y;
         align-items: $x;
@@ -10,9 +34,44 @@
         justify-content: $x;
         align-items: $y;
     }
-
 }
 
+/* BREAKING PAGE RULES */
+@mixin bg-sides($color) {
+    background-color: $color;
+    box-shadow: 0 0 0 100vmax $color;
+    clip-path: inset(0 -100vmax);
+}
+
+/* MEDIA MANAGEMENT */
+@mixin ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
+
+/* SHAPES */
+@mixin square-max($dim) {
+    max-height: $dim;
+    max-width: $dim;
+}
+@mixin square-min($dim) {
+    min-height: $dim;
+    min-width: $dim;
+}
+@mixin square($dim) {
+    height: $dim;
+    width: $dim;
+}
+
+/* VENDOR PREFIXES */
 @mixin vendor-prefixes($property, $value, $prefixes: (moz, o, webkit, ms), $onProperty: true) {
     @each $prefix in $prefixes {
         @if $onProperty {
@@ -23,13 +82,21 @@
     }
     #{$property}: $value;
 }
-
-@mixin pseudo($display: block, $pos: absolute, $content: ''){
-    content: $content;
-    display: $display;
-    position: $pos;
+@mixin input-placeholder {
+    @include vendor-prefixes(appearance, textfield, (moz, webkit));
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &::placeholder {
+        @content;
+    }
 }
-
 @mixin transition($value) {
     @include vendor-prefixes(transition, $value, (moz, o, webkit));
 }
@@ -51,67 +118,3 @@
     @include vendor-prefixes(animation, $value, (moz, o, webkit)); 
 }
 
-@mixin bg-sides($color) {
-    background-color: $color;
-    box-shadow: 0 0 0 100vmax $color;
-    clip-path: inset(0 -100vmax);
-}
-
-@mixin square-max($dim) {
-    max-height: $dim;
-    max-width: $dim;
-}
-@mixin square-min($dim) {
-    min-height: $dim;
-    min-width: $dim;
-}
-@mixin square($dim) {
-    height: $dim;
-    width: $dim;
-}
-
-@mixin margin-w($value) {
-    margin-right: $value;
-    margin-left: $value;
-}
-@mixin margin-h($value) {
-    margin-top: $value;
-    margin-bottom: $value;
-}
-@mixin padding-w($value) {
-    padding-right: $value;
-    padding-left: $value;
-}
-@mixin padding-h($value) {
-    padding-top: $value;
-    padding-bottom: $value;
-}
-
-@mixin ratio($x,$y, $pseudo: false) {
-    $padding: unquote( ( $y / $x ) * 100 + '%' );
-    @if $pseudo {
-        &:before {
-            @include pseudo($pos: relative);
-            width: 100%;
-            padding-top: $padding;
-        }
-    } @else {
-        padding-top: $padding;
-    }
-}
-
-@mixin input-placeholder {
-    @include vendor-prefixes(appearance, textfield, (moz, webkit));
-    &::-webkit-input-placeholder {
-        @content;
-    }
-    &:-moz-placeholder {
-        @content;
-    }
-    &:-ms-input-placeholder {
-        @content;
-    }
-    &::placeholder {
-        @content;
-    }
-}
