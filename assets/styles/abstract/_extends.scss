@@ -1,6 +1,11 @@
 %appearance-none {
     @include vendor-prefixes(appearance, none, moz webkit);
 }
+%button-reset {
+    @extend %appearance-none;
+    border: none;
+    font-family: $baseFont, 'Helvetica', 'Arial', sans-serif;
+}
 
 %pseudo-block {
     content: '';
