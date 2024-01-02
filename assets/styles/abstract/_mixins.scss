@@ -82,3 +82,19 @@
         padding-top: $padding;
     }
 }
+
+@mixin input-placeholder {
+    @include vendor-prefixes(appearance, textfield, (moz, webkit));
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &::placeholder {
+        @content;
+    }
+}
